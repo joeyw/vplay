@@ -1,35 +1,35 @@
-= vplay
+#  Vplay  
 
-* https://github.com/joeyw/vplay
+https://github.com/joeyw/vplay
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 Vplay is a ruby binding for libvlc for playing files.
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
-OS X - [VLC](http://www.videolan.org/)
+### OS X
+[VLC](http://www.videolan.org/)  
 
-Ubuntu - libvlc
+###Ubuntu
+`libvlc-dev`  
 
-== INSTALL:
+## INSTALL:
 
-OS X
+### OS X
 
 [Install VLC](http://www.videolan.org/)
 
 Add the following to your bash profile, because fuck us.
-`export DYLD_LIBRARY_PATH=/Applications/VLC.app/Contents/MacOS/lib:$DYLD_LIBRARY_PATH`
-
+`export DYLD_LIBRARY_PATH=/Applications/VLC.app/Contents/MacOS/lib:$DYLD_LIBRARY_PATH`  
 `gem install vplay`
 
-Ubuntu
+### Ubuntu
 
-`apt-get install libvlc-dev`
-
+`apt-get install libvlc-dev`  
 `gem install vplay`
 
-== LICENSE:
+## LICENSE:
 
 Copyright (c) 2012 Joey Wendt
 
