@@ -1,0 +1,8 @@
+.autotest
+Manifest.txt
+README.md
+CHANGELOG.md
+Rakefile
+lib/vplay.rb
+lib/vplay/version.rb
+test/test_vplay.rb
