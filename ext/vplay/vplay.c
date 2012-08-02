@@ -33,4 +33,5 @@ void Init_vplay()
     mVplay = rb_define_module("Vplay");
     
     Init_vplay_vlc();
+    Init_vplay_player();
 }

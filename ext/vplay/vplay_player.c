@@ -22,10 +22,34 @@
  * THE SOFTWARE.
  */
 
-#include <ruby.h>
-#include <vlc/vlc.h>
+#include <vplay.h>
 
-extern VALUE mVplay;
+extern VALUE cVLC;
 
-void Init_vplay_vlc();
-void Init_vplay_player();
+VALUE cPlayer;
+
+void rb_media_player_free(libvlc_media_player_t *media_player)
+{
+    libvlc_media_player_release(media_player);
+}
+
+static VALUE rb_new_player(VALUE klass, VALUE rb_vlc)
+{
+    libvlc_instance_t *vlc;
+    libvlc_media_player_t *media_player;
+
+    if (!rb_obj_is_kind_of(rb_vlc, cVLC))
+        rb_raise(rb_eTypeError, "Expecting a Vplay::VLC instance");
+    Data_Get_Struct(rb_vlc, libvlc_instance_t, vlc);
+
+    media_player = libvlc_media_player_new(vlc);
+
+    return Data_Wrap_Struct(klass, 0, &libvlc_media_player_release, media_player);
+}
+
+void Init_vplay_player()
+{
+    cPlayer = rb_define_class_under(mVplay, "Player", rb_cObject);
+
+    rb_define_singleton_method(cPlayer, "new", rb_new_player, 1);
+}

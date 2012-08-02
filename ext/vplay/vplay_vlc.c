@@ -33,7 +33,8 @@ void rb_libvlc_free(libvlc_instance_t *vlc)
 
 static VALUE rb_libvlc_new(VALUE klass)
 {
-    libvlc_instance_t * vlc;
+    libvlc_instance_t *vlc;
+
     vlc = libvlc_new(0, NULL);
     return Data_Wrap_Struct(klass, NULL, &rb_libvlc_free, vlc);
 }
