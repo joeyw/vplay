@@ -26,17 +26,16 @@
 
 VALUE cVLC;
 
-static VALUE allocate(VALUE klass)
+void rb_libvlc_free(libvlc_instance_t *vlc)
 {
-    libvlc_instance_t * vlc;
-
-    vlc = libvlc_new(0, NULL);
-    return Data_Wrap_Struct(klass, NULL, NULL, vlc);
+    libvlc_free(vlc);
 }
 
-static VALUE deallocate(void * vlc)
+static VALUE rb_libvlc_new(VALUE klass)
 {
-    libvlc_free((libvlc_instance_t *)vlc);
+    libvlc_instance_t * vlc;
+    vlc = libvlc_new(0, NULL);
+    return Data_Wrap_Struct(klass, NULL, &rb_libvlc_free, vlc);
 }
 
 /*
@@ -48,7 +47,7 @@ static VALUE deallocate(void * vlc)
  *      Vplay::VLC.libvlc_version
  *      #=> "2.0.3 Twoflower"
  */
-static VALUE libvlc_version(VALUE klass)
+static VALUE rb_libvlc_version(VALUE self)
 {
     return rb_str_new2(libvlc_get_version());
 }
@@ -57,7 +56,6 @@ void Init_vplay_vlc()
 {
     cVLC = rb_define_class_under(mVplay, "VLC", rb_cObject);
 
-    rb_define_alloc_func(cVLC, allocate);
-
-    rb_define_singleton_method(cVLC, "libvlc_version", libvlc_version, 0);
+    rb_define_singleton_method(cVLC, "new", rb_libvlc_new, 0);
+    rb_define_singleton_method(cVLC, "libvlc_version", rb_libvlc_version, 0);
 }
