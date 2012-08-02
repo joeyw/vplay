@@ -30,4 +30,10 @@ Hoe.spec 'vplay' do
   end
 end
 
+desc "Open irb preloaded with vplay"
+task :console do
+  sh "irb -rubygems -I lib -r vplay"
+end
+
 Rake::Task[:test].prerequisites << :compile
+Rake::Task[:console].prerequisites << :compile
