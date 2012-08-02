@@ -31,5 +31,6 @@ void Init_vplay()
     VALUE cPlayer;
 
     mVplay = rb_define_module("Vplay");
-    cPlayer = rb_define_class_under(mVplay, "Player", rb_cObject);
+    
+    Init_vplay_vlc();
 }
