@@ -27,8 +27,6 @@ class TestVplay < MiniTest::Unit::TestCase
   end
 
   def test_load_media_file
-    path = "fixtures/portal2-ost-clip.mov"
-
     assert_raises ArgumentError do
       Vplay::Media.new
     end
