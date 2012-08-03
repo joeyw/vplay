@@ -5,6 +5,8 @@ class TestVplay < MiniTest::Unit::TestCase
   def setup
     @vlc = Vplay::VLC.new
     @player = Vplay::Player.new @vlc
+    @media_file = "fixtures/portal2-ost-clip.mov"
+    @media = Vplay::Media.new @vlc, @media_file
   end
 
   def test_vlc_version
@@ -26,7 +28,6 @@ class TestVplay < MiniTest::Unit::TestCase
 
   def test_load_media_file
     path = "fixtures/portal2-ost-clip.mov"
-    @media = Vplay::Media.new @vlc, path
 
     assert_raises ArgumentError do
       Vplay::Media.new
@@ -37,7 +38,14 @@ class TestVplay < MiniTest::Unit::TestCase
     end
 
     assert_raises TypeError, 2 do
-      Vplay::Media.new "", path
+      Vplay::Media.new "", @media_file
     end
+  end
+
+  def test_set_player_media
+    assert @player.media == nil
+
+    @player.media = @media
+    assert_equal @media, @player.media
   end
 end
