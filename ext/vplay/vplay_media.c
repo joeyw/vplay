@@ -45,7 +45,7 @@ static VALUE rb_new_media(VALUE klass, VALUE rb_vlc, VALUE rb_path)
 
     Check_Type(rb_path, T_STRING);
 
-    media = libvlc_media_new_location(vlc, StringValueCStr(rb_path));
+    media = libvlc_media_new_path(vlc, StringValueCStr(rb_path));
 
     return Data_Wrap_Struct(klass, 0, &libvlc_media_release, media);
 }
