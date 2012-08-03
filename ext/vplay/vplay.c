@@ -28,8 +28,6 @@ VALUE mVplay;
 
 void Init_vplay()
 {
-    VALUE cPlayer;
-
     mVplay = rb_define_module("Vplay");
     
     Init_vplay_vlc();
