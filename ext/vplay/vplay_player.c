@@ -29,11 +29,6 @@ extern VALUE cMedia;
 
 VALUE cPlayer;
 
-void rb_media_player_free(void *media_player)
-{
-    libvlc_media_player_release(media_player);
-}
-
 static VALUE rb_new_player(VALUE klass, VALUE rb_vlc)
 {
     libvlc_instance_t *vlc;

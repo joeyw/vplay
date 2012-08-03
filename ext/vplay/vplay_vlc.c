@@ -26,17 +26,12 @@
 
 VALUE cVLC;
 
-void rb_libvlc_free(void *vlc)
-{
-    libvlc_release(vlc);
-}
-
 static VALUE rb_libvlc_new(VALUE klass)
 {
     libvlc_instance_t *vlc;
 
     vlc = libvlc_new(0, NULL);
-    return Data_Wrap_Struct(klass, NULL, rb_libvlc_free, vlc);
+    return Data_Wrap_Struct(klass, NULL, libvlc_release, vlc);
 }
 
 /*
