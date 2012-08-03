@@ -29,6 +29,24 @@ Add the following to your bash profile, because fuck us.
 `apt-get install libvlc-dev`  
 `gem install vplay`
 
+## Example
+
+```ruby
+require 'vplay'
+
+# Kick up new VLC instance and a player for it.
+vlc = Vplay::VLC.new
+player = Vplay::Player.new vlc
+
+# Load the song into the vlc instance.
+media = Vplay::Media.new vlc, "/path/to/awesome.mp3"
+
+# Set the current song for the player
+player.media = media
+
+player.play # that shit
+```
+
 ## LICENSE:
 
 Copyright (c) 2012 Joey Wendt
