@@ -29,7 +29,7 @@ extern VALUE cMedia;
 
 VALUE cPlayer;
 
-void rb_media_player_free(libvlc_media_player_t *media_player)
+void rb_media_player_free(void *media_player)
 {
     libvlc_media_player_release(media_player);
 }
@@ -45,7 +45,7 @@ static VALUE rb_new_player(VALUE klass, VALUE rb_vlc)
     Data_Get_Struct(rb_vlc, libvlc_instance_t, vlc);
 
     media_player = libvlc_media_player_new(vlc);
-    rb_media_player = Data_Wrap_Struct(klass, 0, &libvlc_media_player_release, media_player);
+    rb_media_player = Data_Wrap_Struct(klass, 0, libvlc_media_player_release, media_player);
 
     rb_iv_set(rb_media_player, "@media", Qnil);
 
