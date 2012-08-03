@@ -38,14 +38,18 @@ static VALUE rb_new_player(VALUE klass, VALUE rb_vlc)
 {
     libvlc_instance_t *vlc;
     libvlc_media_player_t *media_player;
+    VALUE rb_media_player;
 
     if (!rb_obj_is_kind_of(rb_vlc, cVLC))
         rb_raise(rb_eTypeError, "Expecting a Vplay::VLC instance");
     Data_Get_Struct(rb_vlc, libvlc_instance_t, vlc);
 
     media_player = libvlc_media_player_new(vlc);
+    rb_media_player = Data_Wrap_Struct(klass, 0, &libvlc_media_player_release, media_player);
 
-    return Data_Wrap_Struct(klass, 0, &libvlc_media_player_release, media_player);
+    rb_iv_set(rb_media_player, "@media", Qnil);
+
+    return rb_media_player;
 }
 
 /*
@@ -83,6 +87,28 @@ static VALUE rb_player_set_media(VALUE self, VALUE rb_media)
     return self;
 }
 
+/*
+ *  call-seq:
+ *      player.play
+ *
+ *  Play the mediaplayer.
+ * 
+ *  Returns true on success.
+ *
+ *  Returns false on error.
+ */
+static VALUE rb_player_play(VALUE self)
+{
+    libvlc_media_player_t *media_player;
+
+    Data_Get_Struct(self, libvlc_media_player_t, media_player);
+
+    if(libvlc_media_player_play(media_player) == 0)
+        return Qtrue;
+
+    return Qfalse;
+}
+
 void Init_vplay_player()
 {
     cPlayer = rb_define_class_under(mVplay, "Player", rb_cObject);
@@ -91,4 +117,5 @@ void Init_vplay_player()
 
     rb_define_method(cPlayer, "media", rb_player_get_media, 0);
     rb_define_method(cPlayer, "media=", rb_player_set_media, 1);
+    rb_define_method(cPlayer, "play", rb_player_play, 0);
 }

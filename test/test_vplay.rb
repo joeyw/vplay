@@ -5,7 +5,7 @@ class TestVplay < MiniTest::Unit::TestCase
   def setup
     @vlc = Vplay::VLC.new
     @player = Vplay::Player.new @vlc
-    @media_file = "fixtures/portal2-ost-clip.mov"
+    @media_file = "file://" + File.expand_path("test/fixtures/portal2-ost-clip.mov")
     @media = Vplay::Media.new @vlc, @media_file
   end
 
@@ -47,5 +47,12 @@ class TestVplay < MiniTest::Unit::TestCase
 
     @player.media = @media
     assert_equal @media, @player.media
+  end
+
+  def test_player_play
+    assert @player.play == false
+
+    @player.media = @media
+    assert @player.play
   end
 end
