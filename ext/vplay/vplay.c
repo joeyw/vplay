@@ -34,4 +34,5 @@ void Init_vplay()
     
     Init_vplay_vlc();
     Init_vplay_player();
+    Init_vplay_media();
 }

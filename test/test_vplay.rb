@@ -13,12 +13,31 @@ class TestVplay < MiniTest::Unit::TestCase
   end
 
   def test_vlc_player
+    assert Vplay::Player.new(@vlc)
+
     assert_raises TypeError do
       Vplay::Player.new "bad type"
     end
 
     assert_raises ArgumentError do
       Vplay::Player.new
+    end
+  end
+
+  def test_load_media_file
+    path = "fixtures/portal2-ost-clip.mov"
+    @media = Vplay::Media.new @vlc, path
+
+    assert_raises ArgumentError do
+      Vplay::Media.new
+    end
+
+    assert_raises TypeError, 2 do
+      Vplay::Media.new "", 0
+    end
+
+    assert_raises TypeError, 2 do
+      Vplay::Media.new "", path
     end
   end
 end
