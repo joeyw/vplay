@@ -53,4 +53,32 @@ class TestVplay < MiniTest::Unit::TestCase
     @player.media = @media
     assert @player.play
   end
+
+  def test_get_media_meta_info
+    meta = @media.meta
+    media = {
+      title: "I'm Different",
+      artist: "Aperture Science Psychoacoustics Laboratory",
+      genre: nil,
+      copyright: nil,
+      album: "Portal 2: Songs to Test By",
+      track_number: "17",
+      description: nil,
+      rating: nil,
+      date: nil,
+      setting: nil,
+      url: nil,
+      language: nil,
+      now_playing: nil,
+      publisher: nil,
+      encoded_by: "iTunes 10.2",
+      artwork_url: nil,
+      track_id: nil
+    }
+
+    media.keys.each do |key| 
+      assert meta.keys.include? key
+      assert_equal media[key], meta[key]
+    end
+  end
 end
