@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "vplay"
-  s.version = "1.0.0.20120804040617"
+  s.version = "1.0.0.20120804041237"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joey Wendt"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email = ["joey@joeywendt.com"]
   s.extensions = ["ext/vplay/extconf.rb"]
   s.extra_rdoc_files = ["Manifest.txt"]
-  s.files = [".autotest", "Manifest.txt", "README.md", "CHANGELOG.md", "Rakefile", "lib/vplay.rb", "lib/vplay/version.rb", "test/test_vplay.rb", "ext/vplay/extconf.rb", ".gemtest"]
+  s.files = [".autotest", ".gemtest", "Manifest.txt", "README.md", "CHANGELOG.md", "Rakefile", "lib/vplay.rb", "lib/vplay/version.rb", "test/test_vplay.rb", "ext/vplay/extconf.rb"]
   s.homepage = "https://github.com/joeyw/vplay"
   s.rdoc_options = ["--main", "README.md"]
   s.require_paths = ["lib"]
