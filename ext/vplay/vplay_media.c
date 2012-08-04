@@ -40,6 +40,11 @@ static VALUE rb_new_media(VALUE klass, VALUE rb_vlc, VALUE rb_path)
 
     Check_Type(rb_path, T_STRING);
 
+    VALUE file_exists = rb_funcall(rb_const_get(rb_cObject, rb_intern("File")), rb_intern("exists?"), 1, rb_path);
+
+    if(!file_exists)
+        rb_raise(rb_eException, "No such file.");
+
     media = libvlc_media_new_path(vlc, StringValueCStr(rb_path));
 
     return Data_Wrap_Struct(klass, 0, libvlc_media_release, media);

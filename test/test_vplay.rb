@@ -38,6 +38,10 @@ class TestVplay < MiniTest::Unit::TestCase
     assert_raises TypeError, 2 do
       Vplay::Media.new "", @media_file
     end
+
+    assert_raises Exception do
+      Vplay::Media.new @vlc, ""
+    end
   end
 
   def test_set_player_media
