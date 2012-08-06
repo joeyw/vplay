@@ -33,6 +33,7 @@ static VALUE rb_new_media(VALUE klass, VALUE rb_vlc, VALUE rb_path)
 {
     libvlc_instance_t *vlc;
     libvlc_media_t *media;
+    VALUE file_exists;
 
     if (!rb_obj_is_kind_of(rb_vlc, cVLC))
         rb_raise(rb_eTypeError, "Expecting a Vplay::VLC instance");
@@ -40,7 +41,7 @@ static VALUE rb_new_media(VALUE klass, VALUE rb_vlc, VALUE rb_path)
 
     Check_Type(rb_path, T_STRING);
 
-    VALUE file_exists = rb_funcall(rb_const_get(rb_cObject, rb_intern("File")), rb_intern("exists?"), 1, rb_path);
+    file_exists = rb_funcall(rb_const_get(rb_cObject, rb_intern("File")), rb_intern("exists?"), 1, rb_path);
 
     if(!file_exists)
         rb_raise(rb_eException, "No such file.");
